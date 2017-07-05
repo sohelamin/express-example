@@ -4,8 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var passport = require('passport');
 
-var config = require('./config');
+var serverConfig = require('./config/server');
+var passportConfig = require('./config/passport');
 
 var app = express();
 
@@ -22,6 +25,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', require('./routes/index'));
 app.use('/posts', require('./routes/post'));
@@ -44,6 +51,6 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-app.listen(config.server.port, function () {
-    console.log('App listening on port ' + config.server.port + '!')
-})
+app.listen(serverConfig.port, function () {
+    console.log('App listening on port ' + serverConfig.port + '!');
+});

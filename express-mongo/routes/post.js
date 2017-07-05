@@ -1,79 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
-var mongoose = require('mongoose');
+var postController = require('./../controllers/post');
 
-var Post = require('./../db').Post;
+router.get('/', postController.index);
 
-router.get('/', function(req, res, next) {
-    Post.find({}, function(err, posts) {
-        if (err) throw err;
+router.get('/create', postController.getCreate);
 
-        res.render('index', {
-            title: 'Express.js',
-            posts: posts
-        });
-    });
-});
+router.post('/', postController.postCreate);
 
-router.get('/create', function(req, res, next) {
-    res.render('create', {
-        title: 'Express.js'
-    });
-});
+router.get('/:postId', postController.show);
 
-router.post('/', function(req, res, next) {
-    var newPost = Post(req.body);
+router.get('/:postId/edit', postController.edit);
 
-    newPost.save(function(err) {
-        if (err) throw err;
+router.post('/:postId', postController.update);
 
-        res.redirect('/posts');
-    });
-});
-
-router.get('/:postId', function(req, res, next) {
-    Post.findOne({_id : new mongoose.mongo.ObjectID(req.params.postId)}, function(err, post) {
-        if (err) throw err;
-
-        res.render('show', {
-            title: 'Express.js',
-            post: post
-        });
-    });
-});
-
-router.get('/:postId/edit', function(req, res, next) {
-    Post.findOne({_id : new mongoose.mongo.ObjectID(req.params.postId)}, function(err, post) {
-        if (err) throw err;
-
-        res.render('edit', {
-            title: 'Express.js',
-            post: post
-        });
-    });
-});
-
-router.post('/:postId', function(req, res, next) {
-    Post.findOne({_id : new mongoose.mongo.ObjectID(req.params.postId)}, function(err, post) {
-        if (err) throw err;
-
-        post.title = req.body.title;
-        post.content = req.body.content;
-
-        post.save(function(err) {
-            if (err) throw err;
-
-            res.redirect('/posts');
-        });
-    });
-});
-
-router.post('/:postId/delete', function(req, res, next) {
-    Post.findOneAndRemove({_id : new mongoose.mongo.ObjectID(req.params.postId)}, function(err) {
-        if (err) throw err;
-        res.redirect('/posts');
-    });
-});
+router.post('/:postId/delete', postController.delete);
 
 module.exports = router;

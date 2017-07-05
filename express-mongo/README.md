@@ -4,7 +4,7 @@
 
 1. Make sure you've installed mongodb in your machine
 
-2. Configure the app in `config.js`
+2. Configure the app in `config` dir
 
 3. Run the following commands
     ``` bash
