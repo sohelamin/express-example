@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var postSchema = new Schema({
+let postSchema = new Schema({
     title: String,
     content: String,
     date: {
@@ -10,6 +10,6 @@ var postSchema = new Schema({
     }
 });
 
-var Post = mongoose.model('Post', postSchema);
+let Post = mongoose.model('Post', postSchema);
 
 module.exports = Post;

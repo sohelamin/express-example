@@ -1,4 +1,12 @@
+const User = require('./../models/User');
+
 exports.index = function(req, res, next) {
+    // let newUser = User({'email': 'sohelamincse@gmail.com', 'password': '123456'});
+
+    // newUser.save(function(err) {
+    //     if (err) throw err;
+    // });
+
     res.render('dashboard', {
         title: 'Express.js'
     });

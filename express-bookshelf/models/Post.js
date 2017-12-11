@@ -1,6 +1,6 @@
-var bookshelf = require('./../config/bookshelf');
+const bookshelf = require('./../config/bookshelf');
 
-var Post = bookshelf.Model.extend({
+let Post = bookshelf.Model.extend({
     tableName: 'posts'
 });
 

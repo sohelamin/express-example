@@ -1,8 +1,8 @@
-var db = {
+let db = {
     client: 'mysql',
     host: '127.0.0.1',
     user: 'root',
-    password: '1234',
+    password: '',
     database: 'express_example'
 };
 

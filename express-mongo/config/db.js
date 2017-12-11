@@ -1,4 +1,4 @@
-var db = {
+let db = {
     host: 'localhost',
     database: 'express_example'
 };

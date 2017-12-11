@@ -1,4 +1,4 @@
-var Post = require('./../models/Post');
+const Post = require('./../models/Post');
 
 exports.index = function(req, res, next) {
     Post.collection()

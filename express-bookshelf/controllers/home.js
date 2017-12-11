@@ -1,10 +1,10 @@
+const User = require('./../models/User');
+
 exports.index = function(req, res, next) {
-    // var newPost = User({'email': 'sohelamincse@gmail.com', 'password': '123456'});
+    // let newUser = new User({'email': 'sohelamincse@gmail.com', 'password': '123456'});
 
-    // newPost.save(function(err) {
-    //     if (err) throw err;
-
-    //     res.redirect('/login');
+    // newUser.save().then(function(model) {
+    //     //
     // });
 
     res.render('dashboard', {

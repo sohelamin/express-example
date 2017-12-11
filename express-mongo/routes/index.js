@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var passport = require('passport');
-var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
+const express = require('express');
+let router = express.Router();
+const passport = require('passport');
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
-var homeController = require('./../controllers/home');
+const homeController = require('./../controllers/home');
 
 router.get('/', homeController.index);
 

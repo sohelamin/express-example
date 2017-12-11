@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var Post = require('./../models/Post');
+const mongoose = require('mongoose');
+const Post = require('./../models/Post');
 
 exports.index = function(req, res, next) {
     Post.find({}, function(err, posts) {
@@ -19,7 +19,7 @@ exports.getCreate = function(req, res, next) {
 }
 
 exports.postCreate = function(req, res, next) {
-    var newPost = Post(req.body);
+    let newPost = Post(req.body);
 
     newPost.save(function(err) {
         if (err) throw err;

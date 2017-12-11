@@ -1,6 +1,6 @@
-var dbConfig = require('./db');
+const dbConfig = require('./db');
 
-var knex = require('knex')({
+let knex = require('knex')({
     client: dbConfig.client,
     connection: {
         host: dbConfig.host,

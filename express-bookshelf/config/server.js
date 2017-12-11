@@ -1,4 +1,4 @@
-var server = {
+let server = {
     port: '3000'
 };
 
