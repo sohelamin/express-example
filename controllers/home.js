@@ -1,12 +1,18 @@
 const User = require('./../models/User');
 
+exports.createUser = async (req, res) => {
+  try {
+    const newUser = new User({ email: 'sohelamincse@gmail.com', password: '123456' });
+    await newUser.save();
+  } catch (error) {
+    console.log(error);
+  }
+
+  await res.send({});
+};
+
+
 exports.index = (req, res) => {
-  // let newUser = User({'email': 'sohelamincse@gmail.com', 'password': '123456'});
-
-  // newUser.save(function(err) {
-  //     if (err) throw err;
-  // });
-
   res.render('dashboard', {
     title: 'Express.js',
   });

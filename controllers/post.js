@@ -1,17 +1,21 @@
 const mongoose = require('mongoose');
+
 const {
   ObjectID,
 } = mongoose.mongo;
 const Post = require('./../models/Post');
 
-exports.index = (req, res) => {
-  Post.find({}, (err, posts) => {
-    if (err) throw err;
+exports.index = async (req, res) => {
+  let posts = [];
+  try {
+    posts = await Post.find({});
+  } catch (error) {
+    console.error(error);
+  }
 
-    res.render('post/index', {
-      title: 'Express.js',
-      posts,
-    });
+  await res.render('post/index', {
+    title: 'Express.js',
+    posts,
   });
 };
 
@@ -22,63 +26,63 @@ exports.getCreate = (req, res) => {
 };
 
 exports.postCreate = async (req, res) => {
-  const post = Post(req.body);
   try {
+    const post = new Post(req.body);
     await post.save();
-    res.redirect('/posts');
-  } catch (err) {
-    res.redirect('/posts');
+  } catch (error) {
+    console.error(error);
   }
+
+  await res.redirect('/posts');
 };
 
-exports.show = (req, res) => {
-  Post.findOne({
-    _id: new ObjectID(req.params.postId),
-  }, (err, post) => {
-    if (err) throw err;
+exports.show = async (req, res) => {
+  let post = null;
+  try {
+    post = await Post.findOne({ _id: new ObjectID(req.params.postId) });
+  } catch (error) {
+    console.error(error);
+  }
 
-    res.render('post/show', {
-      title: 'Express.js',
-      post,
-    });
+  await res.render('post/show', {
+    title: 'Express.js',
+    post,
   });
 };
 
-exports.edit = (req, res) => {
-  Post.findOne({
-    _id: new ObjectID(req.params.postId),
-  }, (err, post) => {
-    if (err) throw err;
+exports.edit = async (req, res) => {
+  let post = null;
+  try {
+    post = await Post.findOne({ _id: new ObjectID(req.params.postId) });
+  } catch (error) {
+    console.error(error);
+  }
 
-    res.render('post/edit', {
-      title: 'Express.js',
-      post,
-    });
+  await res.render('post/edit', {
+    title: 'Express.js',
+    post,
   });
 };
 
-exports.update = (req, res) => {
-  Post.findOne({
-    _id: new ObjectID(req.params.postId),
-  }, (err, post) => {
-    if (err) throw err;
+exports.update = async (req, res) => {
+  try {
+    await Post.findOneAndUpdate(
+      { _id: new ObjectID(req.params.postId) },
+      { title: req.body.title, content: req.body.content },
+    );
+  } catch (error) {
+    console.error(error);
+  }
 
-    post.title = req.body.title;
-    post.content = req.body.content;
-
-    post.save((err) => {
-      if (err) throw err;
-
-      res.redirect('/posts');
-    });
-  });
+  await res.redirect('/posts');
 };
 
-exports.delete = (req, res) => {
-  Post.findOneAndRemove({
-    _id: new ObjectID(req.params.postId),
-  }, (err) => {
-    if (err) throw err;
-    res.redirect('/posts');
-  });
+exports.delete = async (req, res) => {
+  try {
+    await Post.findOneAndRemove({ _id: new ObjectID(req.params.postId) });
+  } catch (error) {
+    console.error(error);
+  }
+
+  await res.redirect('/posts');
 };
