@@ -1,6 +1,4 @@
-let server = {
-    host: '127.0.0.1',
-    port: '3000'
+module.exports = {
+  host: process.env.SERVER_HOST,
+  port: process.env.SERVER_PORT,
 };
-
-module.exports = server;

@@ -1,7 +1,8 @@
 const express = require('express');
-let router = express.Router();
+
+const router = express.Router();
 const passport = require('passport');
-const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
+const { ensureLoggedIn } = require('connect-ensure-login');
 
 const homeController = require('./../controllers/home');
 

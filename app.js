@@ -1,10 +1,9 @@
+require('dotenv').config()
 const express = require('express');
 const path = require('path');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const session = require('express-session');
+const mongoose = require('mongoose');
 const passport = require('passport');
 
 const serverConfig = require('./config/server');
@@ -17,23 +16,25 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false,
 }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(`mongodb://${dbConfig.host}/${dbConfig.database}`, { useNewUrlParser: true });
+try {
+  mongoose.connect(`mongodb://${dbConfig.host}/${dbConfig.name}`, { useNewUrlParser: true });
+} catch (error) {
+  console.error(error);
+}
 
 app.use('/', require('./routes/index'));
 app.use('/posts', require('./routes/post'));
