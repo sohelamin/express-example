@@ -1,10 +1,10 @@
-<div class="panel panel-default">
-    <div class="panel-heading">Post #{{post._id}}</div>
-    <div class="panel-body">
-        <a href="/posts" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-        <a href="/posts/{{post._id}}/edit" title="Edit Post"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+<div class="card">
+    <div class="card-header">Post #{{post._id}}</div>
+    <div class="card-body">
+        <a href="/posts" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+        <a href="/posts/{{post._id}}/edit" title="Edit Post"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
         <form method="POST" action="/posts/{{post._id}}/delete" accept-charset="UTF-8" style="display:inline">
-            <button type="submit" class="btn btn-danger btn-xs" title="Delete Post" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+            <button type="submit" class="btn btn-danger btn-sm" title="Delete Post" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
         </form>
         <br/>
         <br/>
